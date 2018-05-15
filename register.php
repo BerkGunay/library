@@ -67,7 +67,7 @@ if (isset($_POST['register'])) { //user registering
     <button type="submit" class="button button-block" name="register" />Register</button>
 
     <div class="container signin">
-        <p>Already have an account? <a href="/login.php">Sign in</a>.</p>
+        <p>Already have an account? <a href="/library/login.php">Sign in</a>.</p>
     </div>
     </form>
 <?php require 'inc/footer.php'; ?>

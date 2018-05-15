@@ -5,7 +5,7 @@ require 'config/db.php';
 if (isset($_POST['addbook'])) {
 
     // Check if user is logged in using the session variable
-    if ( $_SESSION['logged_in'] != 1 or $_SESSION['allowed'] != true) {
+    if ( $_SESSION['logged_in'] != 1 or $_SESSION['allowed'] != 1) {
         $_SESSION['message'] = "You must be allowed to add books!";
         header("location: error.php");    
     }
@@ -20,6 +20,8 @@ if (isset($_POST['addbook'])) {
         $description = $mysqli->escape_string($_POST['description']);
         $publishdate = $mysqli->escape_string($_POST['publishdate']);
         $pagenum = $mysqli->escape_string($_POST['pagenum']);
+        $addedby = $_SESSION['id'];
+        $addedbyname = $_SESSION['name'];
 
         $result = $mysqli->query("SELECT * FROM user WHERE title='$title' AND author='$author'");
         if ( $result->num_rows > 0 ) {
@@ -30,8 +32,8 @@ if (isset($_POST['addbook'])) {
         }
     
         else { 
-            $sql = "INSERT INTO book (title, author, genre, description, publishdate, pagenum) " 
-                    . "VALUES ('$title','$author','$genre','$description','$publishdate','$pagenum')";
+            $sql = "INSERT INTO book (title, author, genre, description, publishdate, pagenum, addedby, addedbyname) " 
+                    . "VALUES ('$title','$author','$genre','$description','$publishdate','$pagenum', '$addedby', '$addedbyname')";
             // Add book to the database
             if ( $mysqli->query($sql) ){
                 header("location: index.php"); 

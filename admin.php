@@ -14,7 +14,7 @@ if($_SESSION['name'] != 'root'){
         $sql = "UPDATE user SET allowed=1 WHERE id='$id'";
 
         if ($mysqli->query($sql) === TRUE) {
-            echo "Record updated successfully";
+            echo " User allowed to add books successfully";
         } else {
             echo "Error updating record: " . $mysqli->error;
         }
@@ -25,12 +25,11 @@ if($_SESSION['name'] != 'root'){
         $sql = "UPDATE user SET allowed=0 WHERE id='$id'";
 
         if ($mysqli->query($sql) === TRUE) {
-            echo "Record updated successfully";
+            echo "User disallowed to add books";
         } else {
             echo "Error updating record: " . $mysqli->error;
         }
     }
-
 }
 ?>
 

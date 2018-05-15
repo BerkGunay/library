@@ -3,7 +3,7 @@
 require 'config/db.php';
 session_start();
 
-$books = $mysqli->query("SELECT * FROM book") or die($mysqli->error());
+$books = $mysqli->query("SELECT * FROM book WHERE borrowedby=0 ") or die($mysqli->error());
 
 ?>
 
@@ -13,10 +13,12 @@ $books = $mysqli->query("SELECT * FROM book") or die($mysqli->error());
 		<h1>Book List</h1>
 		<?php foreach($books as $book) : ?>
 			<div class="well">
-				<h3><?php echo $book['title']; ?></h3>
+				<hr>
+				<h3><?php echo $book['title']; ?></h3><small> [<?php echo $book['id'];?>]</small>
 				<small>Publish date <?php echo $book['publishdate']; ?> by <?php echo $book['author']; ?></small>
 				<p><?php echo $book['description']; ?></p>
-				<a class="btn btn-default" href="<?php echo ROOT_URL; ?>post.php?id=<?php echo $post['id']; ?>">Borrow</a>
+				<p><small>Added by: <?php echo $book['addedbyname'];?></small><p>
+				<hr>
 			</div>
 		<?php endforeach; ?>
 	</div>

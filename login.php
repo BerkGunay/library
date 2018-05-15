@@ -26,8 +26,10 @@ if (isset($_POST['login'])) { //user logging in
             // This is how we'll know the user is logged in
             $_SESSION['logged_in'] = true;
 
-            if($user['name'] == 'root'){
+            if($user['name'] == 'root' or $user['name'] == 'admin'){
                 $_SESSION['isAdmin'] = true;
+            }else{
+                $_SESSION['isAdmin'] = false;
             }
 
             header("location: index.php");
